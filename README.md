@@ -31,8 +31,10 @@ python secom_yield_rca.py      # downloads data automatically, ~30 s
 
 ## Results
 
-_Fill in from `metrics.json` after running._
+- **1,567 lots**, 104 failed (6.6%). Line yield **93.4%**
+- Signals: 590 raw → **446** after cleaning (144 dead or broken sensors removed)
+- **13 signals** significantly separate failed lots from passing ones (FDR q < 0.01). Top 3: **s059, s103, s247**
+- Fail prediction using only the **top 15 signals** (selected inside each CV fold): ROC-AUC **0.73**. It catches **74%** of failed lots while flagging **36%** of all lots, about **2× better than random** inspection at the same flag rate. That matches the model using all 446 signals (ROC-AUC 0.735) with 3% of the inputs.
 
-- Signals: 590 raw → **__** after cleaning
-- Significant signals (q < 0.01): **__**. Top 3: **__, __, __**
-- Fail prediction (top 15 signals): ROC-AUC **__**, catching **__%** of failed lots while flagging **__%** of all lots
+![Top signals](images/top_signals.png)
+![Control charts](images/control_charts.png)
